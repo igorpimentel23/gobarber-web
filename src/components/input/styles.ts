@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-
+import { colors } from '../../styles/colors';
 import Tooltip from '../tooltip';
 
 interface ContainerProps {
@@ -9,13 +9,13 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  background: #232129;
+  background: ${colors.backgroundSecondary};
   border-radius: 10px;
-  padding: 0 16px;
+  padding: 0 12px;
   width: 100%;
 
-  border: 2px solid #232129;
-  color: #666360;
+  border: 2px solid ${colors.backgroundSecondary};
+  color: ${colors.textFade};
 
   display: flex;
   align-items: center;
@@ -27,31 +27,31 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isErrored &&
     css`
-      border-color: #c53030;
+      border-color: ${colors.textError};
     `}
 
   ${props =>
     props.isFocused &&
     css`
-      border-color: #ff9000;
-      color: #ff9000;
+      border-color: ${colors.primary};
+      color: ${colors.primary};
     `}
 
   ${props =>
     props.isFilled &&
     css`
-      color: #ff9000;
+      color: ${colors.primary};
     `}
 
   input {
     background: transparent;
     flex: 1;
     border: 0;
-    color: #f4ede8;
+    color: ${colors.textLight};
     padding: 16px 0;
 
     &::placeholder {
-      color: #666360;
+      color: ${colors.textFade};
     }
   }
 
@@ -63,18 +63,18 @@ export const Container = styled.div<ContainerProps>`
 export const Error = styled(Tooltip)`
   display: flex;
   align-items: center;
-  margin-left: 16px;
+  margin-left: 0px;
 
   svg {
     margin: 0;
   }
 
   span {
-    background: #c53030;
-    color: #fff;
+    background: ${colors.textError};
+    color: ${colors.textWhite};
 
     &::before {
-      border-color: #c53030 transparent;
+      border-color: ${colors.textError} transparent;
     }
   }
 `;

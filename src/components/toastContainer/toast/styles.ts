@@ -1,30 +1,31 @@
 import styled, { css } from 'styled-components';
 import { animated } from 'react-spring';
+import { colors } from '../../../styles/colors';
 
 interface ContainerProps {
   type?: 'success' | 'error' | 'info';
-  hasDescription: string;
+  hasdescription: string;
 }
 
 const toastTypeVariations = {
   info: css`
-    background: #ebf8ff;
-    color: #3172b7;
+    background: ${colors.backgroundInfo};
+    color: ${colors.textInfo};
   `,
 
   success: css`
-    background: #e6fffa;
-    color: #2e656a;
+    background: ${colors.backgroundSuccess};
+    color: ${colors.textSuccess};
   `,
 
   error: css`
-    background: #fddede;
-    color: #c53030;
+    background: ${colors.backgroundError};
+    color: ${colors.textError};
   `,
 };
 
 export const Container = styled(animated.div)<ContainerProps>`
-  width: 360px;
+  max-width: 360px;
   position: relative;
   padding: 16px 30px 16px 16px;
   border-radius: 10px;
@@ -55,14 +56,14 @@ export const Container = styled(animated.div)<ContainerProps>`
   button {
     position: absolute;
     right: 16px;
-    top: 19px;
+    top: 12px;
     border: 0;
     background: transparent;
     color: inherit;
   }
 
   ${props =>
-    !(props.hasDescription === 'true') &&
+    !(props.hasdescription === 'true') &&
     css`
       align-items: center;
 

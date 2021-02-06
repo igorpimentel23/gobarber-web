@@ -73,15 +73,19 @@ const SignUp: React.FC = () => {
   );
 
   return (
-    <Container>
-      <Background />
+    <Container className="vh-100 d-flex align-items-stretch">
+      <Background className="flex-lg-fill" />
 
-      <Content>
-        <AnimationContainer>
+      <Content className="d-flex flex-column justify-content-center align-items-center container">
+        <AnimationContainer className="d-flex flex-column justify-content-center align-items-center w-100">
           <img src={logoImg} alt="GoBarber" />
 
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu Cadastro</h1>
+          <Form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="my-5 text-center w-100"
+          >
+            <h1 className="mb-4 fs-md">Faça seu Cadastro</h1>
             <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
             <Input
               name="email"
@@ -99,8 +103,11 @@ const SignUp: React.FC = () => {
             <Button type="submit">Cadastrar</Button>
           </Form>
 
-          <Link to="/">
-            <FiArrowLeft />
+          <Link
+            to="/"
+            className="d-flex align-items-center mt-2 text-decoration-none"
+          >
+            <FiArrowLeft className="me-2" />
             Voltar para logon
           </Link>
         </AnimationContainer>

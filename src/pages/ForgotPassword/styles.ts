@@ -7,6 +7,7 @@ export const Container = styled.div``;
 
 export const Content = styled.div`
   max-width: 700px;
+  min-width: 320px;
 `;
 
 const appearFromLeft = keyframes`
@@ -40,6 +41,10 @@ export const AnimationContainer = styled.div`
 
     &:hover {
       color: ${shade(0.2, colors.primary)};
+    }
+
+    svg {
+      margin-right: 16px;
     }
   }
 `;
