@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useRef } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { FiArrowLeft, FiMail, FiUser, FiLock, FiCamera } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -27,10 +33,18 @@ interface ProfileFormData {
 
 const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [isNameFilled, setIsNameFilled] = useState(false);
+  const [isEmailFilled, setIsEmailFilled] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordFilled, setIsPasswordFilled] = useState(false);
   const { addToast } = useToast();
   const history = useHistory();
-
   const { user, updateUser } = useAuth();
+
+  useEffect(() => {
+    setIsNameFilled(!!formRef.current?.getFieldValue('name'));
+    setIsEmailFilled(!!formRef.current?.getFieldValue('email'));
+  }, []);
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -110,6 +124,16 @@ const Profile: React.FC = () => {
     [addToast, history, updateUser],
   );
 
+  const handlePasswordInputFocus = useCallback(() => {
+    setIsPasswordFocused(true);
+  }, []);
+
+  const handlePasswordInputBlur = useCallback(() => {
+    setIsPasswordFocused(false);
+
+    setIsPasswordFilled(!!formRef.current?.getFieldValue('password'));
+  }, []);
+
   const handleAvatarChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
@@ -170,32 +194,49 @@ const Profile: React.FC = () => {
             </AvatarInput>
 
             <h1 className="text-start fs-sm mb-4">Meu Perfil</h1>
-            <Input name="name" icon={FiUser} type="text" placeholder="Nome" />
+            <Input
+              name="name"
+              icon={FiUser}
+              type="text"
+              placeholder="Nome"
+              filled={isNameFilled}
+            />
             <Input
               name="email"
               icon={FiMail}
               type="email"
               placeholder="E-mail"
+              filled={isEmailFilled}
             />
             <Input
               containerStyle={{ marginTop: 24 }}
-              name="old_password"
-              icon={FiLock}
-              type="password"
-              placeholder="Senha atual"
-            />
-            <Input
               name="password"
               icon={FiLock}
               type="password"
               placeholder="Nova senha"
+              onFocus={handlePasswordInputFocus}
+              onBlur={handlePasswordInputBlur}
+              filled={isPasswordFilled}
+              focused={isPasswordFocused}
             />
-            <Input
-              name="password_confirmation"
-              icon={FiLock}
-              type="password"
-              placeholder="Confirmar senha"
-            />
+            <div
+              className={`passwordHidden ${
+                isPasswordFilled || isPasswordFocused ? ' show' : ''
+              }`}
+            >
+              <Input
+                name="password_confirmation"
+                icon={FiLock}
+                type="password"
+                placeholder="Confirmar nova senha"
+              />
+              <Input
+                name="old_password"
+                icon={FiLock}
+                type="password"
+                placeholder="Senha atual"
+              />
+            </div>
 
             <Button type="submit">Confirmar mudanças</Button>
           </Form>

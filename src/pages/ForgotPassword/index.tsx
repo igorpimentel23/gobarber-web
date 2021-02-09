@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { FiLogIn, FiMail } from 'react-icons/fi';
+import { FiArrowLeft, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -103,7 +103,7 @@ const ForgotPassword: React.FC = () => {
             to="/"
             className="d-flex align-items-center mt-3 text-decoration-none"
           >
-            <FiLogIn className="me-2" />
+            <FiArrowLeft className="me-2" />
             Voltar ao login
           </Link>
         </AnimationContainer>

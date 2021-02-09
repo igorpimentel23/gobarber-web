@@ -107,6 +107,17 @@ button {
   margin: -2;
 }
 
+.passwordHidden{
+  height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:height 0.5s, opacity 0.5s;
+}
+
+.show{
+  opacity:1;
+  height:128px;
+}
 
 `;
 

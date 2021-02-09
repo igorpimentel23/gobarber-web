@@ -8,7 +8,8 @@ import {
   FiInfo,
   FiXCircle,
 } from 'react-icons/fi';
-import { Container } from './styles';
+import { Container, TimerBar } from './styles';
+import { useSpring } from 'react-spring';
 
 interface ToastProps {
   message: ToastMessage;
@@ -23,6 +24,12 @@ const icons = {
 
 const Toast: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
+
+  const { life } = useSpring({
+    from: { life: 0 },
+    life: 100,
+    config: { duration: 3000 },
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -48,6 +55,15 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
         <strong>{message.title}</strong>
         {message.description && <p>{message.description}</p>}
       </div>
+
+      <TimerBar
+        type={message.type}
+        style={{
+          width: life
+            .interpolate({ range: [0, 1], output: [0, 1] })
+            .interpolate(life => `${life}%`),
+        }}
+      />
 
       <button onClick={() => removeToast(message.id)} type="button">
         <FiXCircle size={18} />
