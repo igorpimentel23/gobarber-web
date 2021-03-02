@@ -48,6 +48,7 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
       type={message.type}
       hasdescription={check.toString()}
       style={style}
+      className='pb-3'
     >
       {icons[message.type || 'info']}
 
