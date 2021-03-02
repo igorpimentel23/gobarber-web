@@ -87,8 +87,8 @@ export const Container = styled(animated.div)<ContainerProps>`
 
   button {
     position: absolute;
-    right: 16px;
-    top: 12px;
+    right: 0;
+    top: 0;
     border: 0;
     background: transparent;
     color: inherit;
